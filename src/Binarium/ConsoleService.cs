@@ -28,10 +28,8 @@ namespace Binarium
 
             _appLifetime.ApplicationStarted.Register(() =>
             {
-                Task.Run(async () =>
+                Task.Run(() =>
                 {
-                    await Task.Delay(10, cancellationToken);
-
                     try
                     {
                         _app.Run();
