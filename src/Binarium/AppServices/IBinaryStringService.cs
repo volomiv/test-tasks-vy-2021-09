@@ -1,7 +1,9 @@
-﻿namespace Binarium.AppServices
+﻿using Binarium.Models;
+
+namespace Binarium.AppServices
 {
     public interface IBinaryStringService
     {
-        bool CheckForBeingGood(string input);
+        CheckResultModel CheckForBeingGood(string input);
     }
 }

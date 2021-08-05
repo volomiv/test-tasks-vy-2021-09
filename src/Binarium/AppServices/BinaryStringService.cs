@@ -1,16 +1,24 @@
-﻿namespace Binarium.AppServices
+﻿using Binarium.Models;
+
+namespace Binarium.AppServices
 {
     internal class BinaryStringService : IBinaryStringService
     {
-        public bool CheckForBeingGood(string input)
+        public CheckResultModel CheckForBeingGood(string input)
         {
-            // Empty string is not a binary string by definition
             if (string.IsNullOrEmpty(input))
-                return false;
+                return new CheckResultModel
+                {
+                    Code = (int)BinaryStringTypes.Empty,
+                    Description = "Empty string is not a binary string by definition."
+                };
 
-            // The number of 0's is definitely not equal to the number of 1's.
             if (input.Length % 2 == 1)
-                return false;
+                return new CheckResultModel
+                {
+                    Code = (int)BinaryStringTypes.ZeroOneInequality,
+                    Description = "The number of 0's is definitely not equal to the number of 1's."
+                };
 
             var numberBalance = 0;
 
@@ -20,17 +28,34 @@
                 {
                     case '1': numberBalance++; break;
                     case '0': numberBalance--; break;
-                    default: return false;
+                    default:
+                        return new CheckResultModel
+                        {
+                            Code = (int)BinaryStringTypes.NotBinary,
+                            Description = "String contains not only 0's and/or 1's."
+                        };
                 }
 
                 if (numberBalance < 0)
-                    return false;
+                    return new CheckResultModel
+                    {
+                        Code = (int)BinaryStringTypes.PrefixWithOneLessZero,
+                        Description = "Some prefix has the number of 1's less that the number of 0's."
+                    };
             }
 
             if (numberBalance != 0)
-                return false;
+                return new CheckResultModel
+                {
+                    Code = (int)BinaryStringTypes.ZeroOneInequality,
+                    Description = "The number of 0's is not equal to the number of 1's."
+                };
 
-            return true;
+            return new CheckResultModel
+            {
+                Code = (int)BinaryStringTypes.Good,
+                Description = "The string is good."
+            };
         }
     }
 }
