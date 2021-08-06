@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
-namespace Forbytes.MovieCatalog.Repositories.Data.Models
+namespace Forbytes.MovieCatalog.AppServices.Models
 {
-    public class Movie
+    public class MovieModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
         public string Type { get; set; }
@@ -19,7 +15,6 @@ namespace Forbytes.MovieCatalog.Repositories.Data.Models
 
         public string Plot { get; set; }
 
-        [BsonElement("fullplot")]
         public string FullPlot { get; set; }
 
         public DateTime Released { get; set; }
@@ -42,18 +37,13 @@ namespace Forbytes.MovieCatalog.Repositories.Data.Models
 
         public int Runtime { get; set; }
 
-        public Imdb Imdb { get; set; }
+        public ImdbModel Imdb { get; set; }
 
-        public Awards Awards { get; set; }
+        public AwardsModel Awards { get; set; }
 
         public int NumberOfComments { get; set; }
 
-        [BsonElement("metacritic")]
-        public int? MetacriticScore { get; set; }
-
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        public List<Comment> Comments { get; set; }
     }
 }

@@ -1,18 +1,25 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using Forbytes.MovieCatalog.Repositories.Data.Projections;
-using MongoDB.Driver;
+using Forbytes.Core.LanguageExtensions;
+using Forbytes.MovieCatalog.AppServices.Models;
 
 namespace Forbytes.MovieCatalog.AppServices.Comments
 {
     public interface IMoviesAppService
     {
-        Task AddComment(string movieId, string userName, string userEmail, string comment, CancellationToken cancellationToken = default);
+        Task<Result<MovieModel>> GetMovie(string movieId, CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> UpdateComment(string commentId, string movieId, string userEmail, string comment, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<MovieModel>> GetMoviesInChunks(
+            int moviesPerPage,
+            int page,
+            string sort,
+            int sortDirection,
+            CancellationToken cancellationToken = default);
 
-        Task<DeleteResult> DeleteComment(string commentId, string movieId, string userEmail, CancellationToken cancellationToken = default);
-
-        Task<TopCommentersProjection> GetMostActiveCommenters(int limit, CancellationToken cancellationToken = default);
+        Task<MoviesByCastModel> GetMoviesByCastWithCount(
+            string cast,
+            int page = 0,
+            CancellationToken cancellationToken = default);
     }
 }

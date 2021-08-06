@@ -1,40 +1,59 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using Forbytes.MovieCatalog.Repositories.Data.Projections;
+using AutoMapper;
+using Forbytes.Core;
+using Forbytes.Core.LanguageExtensions;
+using Forbytes.MovieCatalog.AppServices.Models;
 using Forbytes.MovieCatalog.Repositories.Repositories;
-using MongoDB.Driver;
 
 namespace Forbytes.MovieCatalog.AppServices.Comments
 {
     internal class MoviesAppService : IMoviesAppService
     {
         private readonly IMoviesRepository _repository;
+        private readonly IMapper _mapper;
 
-        public MoviesAppService(IMoviesRepository repository)
+        public MoviesAppService(
+            IMoviesRepository repository,
+            IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public Task AddComment(string movieId, string userName, string userEmail, string comment,
+        public async Task<Result<MovieModel>> GetMovie(string movieId, CancellationToken cancellationToken = default)
+        {
+            var movie = await _repository.GetMovie(movieId, cancellationToken);
+
+            if (movie != null)
+                return _mapper.Map<MovieModel>(movie);
+
+            return new ErrorModel
+            {
+                Error = ErrorCodeConstants.Request.NotFound,
+                Message = $"Movie with id '{movieId}' was not found."
+            };
+        }
+
+        public async Task<IReadOnlyList<MovieModel>> GetMoviesInChunks(
+            int moviesPerPage,
+            int page,
+            string sort,
+            int sortDirection,
             CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            var movies =
+                await _repository.GetMoviesInChunks(moviesPerPage, page, sort, sortDirection, cancellationToken);
+                
+            return _mapper.Map<IReadOnlyList<MovieModel>>(movies);
         }
 
-        public Task<UpdateResult> UpdateComment(string commentId, string movieId, string userEmail, string comment,
-            CancellationToken cancellationToken = default)
+        public async Task<MoviesByCastModel> GetMoviesByCastWithCount(string cast, int page = 0, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
-        }
+            var movies = await _repository.GetMoviesByCastWithCount(cast, page, cancellationToken);
 
-        public Task<DeleteResult> DeleteComment(string commentId, string movieId, string userEmail, CancellationToken cancellationToken = default)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<TopCommentersProjection> GetMostActiveCommenters(int limit, CancellationToken cancellationToken = default)
-        {
-            throw new System.NotImplementedException();
+            return _mapper.Map<MoviesByCastModel>(movies);
         }
     }
 }
