@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Forbytes.Core;
 using Forbytes.MovieCatalog.API.ApiModels;
 using Forbytes.MovieCatalog.AppServices.Comments;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Forbytes.MovieCatalog.API.Controllers
 {
@@ -12,21 +12,23 @@ namespace Forbytes.MovieCatalog.API.Controllers
     [Route("api/v1/movies/comment")]
     public class CommentController : ControllerBase
     {
-        private readonly ILogger<CommentController> _logger;
         private readonly ICommentsAppService _commentsService;
+        private readonly IMoviesAppService _moviesService;
         private readonly IMapper _mapper;
 
         public CommentController(
-            ILogger<CommentController> logger,
             ICommentsAppService commentsService,
+            IMoviesAppService moviesService,
             IMapper mapper)
         {
-            _logger = logger;
             _commentsService = commentsService;
+            _moviesService = moviesService;
             _mapper = mapper;
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(MovieApiModel), 200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<ActionResult> AddComment([FromBody] AddCommentInputApiModel input, CancellationToken cancellationToken = default)
         {
             var result = await _commentsService.AddComment(
@@ -36,12 +38,19 @@ namespace Forbytes.MovieCatalog.API.Controllers
                 input.Comment,
                 cancellationToken);
 
-            return result.IsSuccess
-                ? Ok(result.Value)
-                : BadRequest(result.Error);
+            if (result.IsError)
+                return BadRequest(result.Error);
+
+            var movieResult = await _moviesService.GetMovie(input.MovieId, cancellationToken);
+
+            return movieResult.IsSuccess
+                ? Ok(movieResult.Value)
+                : BadRequest(movieResult.Error);
         }
 
         [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<ActionResult> UpdateCommentAsync([FromBody] UpdateCommentInputApiModel input, CancellationToken cancellationToken = default)
         {
             var result = await _commentsService.UpdateComment(
@@ -53,6 +62,8 @@ namespace Forbytes.MovieCatalog.API.Controllers
         }
 
         [HttpDelete]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<ActionResult> DeleteCommentAsync([FromBody] DeleteCommentInputApiModel input, CancellationToken cancellationToken = default)
         {
             var result = await _commentsService.DeleteComment(
@@ -63,6 +74,8 @@ namespace Forbytes.MovieCatalog.API.Controllers
         }
 
         [HttpGet("report")]
+        [ProducesResponseType(typeof(TopCommentersApiModel), 200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<ActionResult> MostActiveCommentersReport(CancellationToken cancellationToken = default)
         {
             var result = await _commentsService.GetMostActiveCommenters(

@@ -44,6 +44,8 @@ namespace Forbytes.MovieCatalog.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Forbytes.MovieCatalog.API v1"));
             }
 
+            app.UseMiddleware<MovieCatalogMiddleware>();
+
             //app.UseHttpsRedirection();
 
             app.UseRouting();

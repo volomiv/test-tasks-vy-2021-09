@@ -2,10 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Forbytes.Core;
 using Forbytes.MovieCatalog.API.ApiModels;
 using Forbytes.MovieCatalog.AppServices.Comments;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Forbytes.MovieCatalog.API.Controllers
 {
@@ -13,21 +13,20 @@ namespace Forbytes.MovieCatalog.API.Controllers
     [Route("api/v1/movies")]
     public class MovieController : ControllerBase
     {
-        private readonly ILogger<MovieController> _logger;
         private readonly IMoviesAppService _moviesService;
         private readonly IMapper _mapper;
 
         public MovieController(
-            ILogger<MovieController> logger,
             IMoviesAppService moviesService,
             IMapper mapper)
         {
-            _logger = logger;
             _moviesService = moviesService;
             _mapper = mapper;
         }
 
         [HttpGet("{movieId}")]
+        [ProducesResponseType(typeof(MovieApiModel), 200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<ActionResult> GetMovie(string movieId, CancellationToken cancellationToken = default)
         {
             var result = await _moviesService.GetMovie(movieId, cancellationToken);
@@ -38,6 +37,8 @@ namespace Forbytes.MovieCatalog.API.Controllers
         }
 
         [HttpGet("")]
+        [ProducesResponseType(typeof(IReadOnlyList<MovieApiModel>), 200)]
+        [ProducesResponseType(typeof(ErrorModel), 400)]
         public async Task<ActionResult> GetMoviesInChunks(
             int limit = 20,
             [FromQuery(Name = "page")] int page = 0,
@@ -56,6 +57,7 @@ namespace Forbytes.MovieCatalog.API.Controllers
         }
 
         [HttpGet("search/cast-{cast}/{page?}")]
+        [ProducesResponseType(typeof(MoviesByCastApiModel), 200)]
         public async Task<ActionResult> GetMoviesByCastAsync(string cast, int page = 0, CancellationToken cancellationToken = default)
         {
             var movies = await _moviesService.GetMoviesByCastWithCount(cast, page, cancellationToken);
