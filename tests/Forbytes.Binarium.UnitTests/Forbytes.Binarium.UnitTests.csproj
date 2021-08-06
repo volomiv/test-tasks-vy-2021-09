@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Binarium\Binarium.csproj" />
+    <ProjectReference Include="..\..\src\Forbytes.Binarium\Forbytes.Binarium.csproj" />
   </ItemGroup>
 
 </Project>

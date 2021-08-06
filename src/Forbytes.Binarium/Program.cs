@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Binarium.AppServices;
-using Binarium.Models;
+using Forbytes.Binarium.AppServices;
+using Forbytes.Binarium.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Binarium
+namespace Forbytes.Binarium
 {
     internal class Program
     {
@@ -20,7 +20,7 @@ namespace Binarium
                         .AddJsonFile(@"./config/appsettings.json");
 
                 })
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices(services =>
                 {
                     services
                         .AddHostedService<ConsoleService>()

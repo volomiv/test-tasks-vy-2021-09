@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Binarium
+namespace Forbytes.Binarium
 {
     public class ConsoleService : IHostedService
     {

@@ -1,9 +1,9 @@
-﻿using Binarium.AppServices;
-using Binarium.Models;
+﻿using Forbytes.Binarium.AppServices;
+using Forbytes.Binarium.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Binarium.UnitTests
+namespace Forbytes.Binarium.UnitTests
 {
     public class BinaryStringServiceTests
     {

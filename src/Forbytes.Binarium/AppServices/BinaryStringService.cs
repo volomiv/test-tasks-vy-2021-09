@@ -1,6 +1,6 @@
-﻿using Binarium.Models;
+﻿using Forbytes.Binarium.Models;
 
-namespace Binarium.AppServices
+namespace Forbytes.Binarium.AppServices
 {
     internal class BinaryStringService : IBinaryStringService
     {

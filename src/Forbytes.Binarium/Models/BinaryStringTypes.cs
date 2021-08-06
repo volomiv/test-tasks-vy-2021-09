@@ -1,4 +1,4 @@
-﻿namespace Binarium.Models
+﻿namespace Forbytes.Binarium.Models
 {
     public enum BinaryStringTypes
     {

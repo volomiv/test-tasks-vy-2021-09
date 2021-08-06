@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using Binarium.AppServices;
-using Binarium.Models;
+using Forbytes.Binarium.AppServices;
+using Forbytes.Binarium.Models;
 using Microsoft.Extensions.Logging;
 
-namespace Binarium
+namespace Forbytes.Binarium
 {
     public class App
     {

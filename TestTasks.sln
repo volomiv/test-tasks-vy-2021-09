@@ -3,9 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Binarium", "src\Binarium\Binarium.csproj", "{3C43218D-1406-463A-BD3A-64E1CF78CFAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forbytes.Binarium", "src\Forbytes.Binarium\Forbytes.Binarium.csproj", "{3C43218D-1406-463A-BD3A-64E1CF78CFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binarium.UnitTests", "tests\Binarium.UnitTests\Binarium.UnitTests.csproj", "{06CBAF4B-264B-485E-80E5-1B9302647813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forbytes.Binarium.UnitTests", "tests\Forbytes.Binarium.UnitTests\Forbytes.Binarium.UnitTests.csproj", "{06CBAF4B-264B-485E-80E5-1B9302647813}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task 2 BinaryString", "Task 2 BinaryString", "{D0F5CBC6-549A-4C84-ABE1-45B9AF18ADCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task 1 MovieCatalog", "Task 1 MovieCatalog", "{8AE45026-C2BC-4E18-B512-53E89F8ADA90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forbytes.MovieCatalog.API", "src\Forbytes.MovieCatalog.API\Forbytes.MovieCatalog.API.csproj", "{5135D3AF-F3AF-46DF-8E42-44517BB9FA6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forbytes.MovieCatalog.Repositories", "src\Forbytes.MovieCatalog.Repositories\Forbytes.MovieCatalog.Repositories.csproj", "{25B38F3B-1DA5-42D3-BB1A-E5CFE0EDDCDA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forbytes.MovieCatalog.AppServices", "src\Forbytes.MovieCatalog.AppServices\Forbytes.MovieCatalog.AppServices.csproj", "{90E950C2-5529-4A3F-9AE3-284E910FF1F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forbytes.Core", "src\Forbytes.Core\Forbytes.Core.csproj", "{44A81221-38D6-4053-ACA4-B1D0AE975CC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +33,33 @@ Global
 		{06CBAF4B-264B-485E-80E5-1B9302647813}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06CBAF4B-264B-485E-80E5-1B9302647813}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06CBAF4B-264B-485E-80E5-1B9302647813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5135D3AF-F3AF-46DF-8E42-44517BB9FA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5135D3AF-F3AF-46DF-8E42-44517BB9FA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5135D3AF-F3AF-46DF-8E42-44517BB9FA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5135D3AF-F3AF-46DF-8E42-44517BB9FA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25B38F3B-1DA5-42D3-BB1A-E5CFE0EDDCDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25B38F3B-1DA5-42D3-BB1A-E5CFE0EDDCDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25B38F3B-1DA5-42D3-BB1A-E5CFE0EDDCDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25B38F3B-1DA5-42D3-BB1A-E5CFE0EDDCDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E950C2-5529-4A3F-9AE3-284E910FF1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E950C2-5529-4A3F-9AE3-284E910FF1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E950C2-5529-4A3F-9AE3-284E910FF1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E950C2-5529-4A3F-9AE3-284E910FF1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44A81221-38D6-4053-ACA4-B1D0AE975CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44A81221-38D6-4053-ACA4-B1D0AE975CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44A81221-38D6-4053-ACA4-B1D0AE975CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44A81221-38D6-4053-ACA4-B1D0AE975CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C43218D-1406-463A-BD3A-64E1CF78CFAC} = {D0F5CBC6-549A-4C84-ABE1-45B9AF18ADCD}
+		{06CBAF4B-264B-485E-80E5-1B9302647813} = {D0F5CBC6-549A-4C84-ABE1-45B9AF18ADCD}
+		{5135D3AF-F3AF-46DF-8E42-44517BB9FA6E} = {8AE45026-C2BC-4E18-B512-53E89F8ADA90}
+		{25B38F3B-1DA5-42D3-BB1A-E5CFE0EDDCDA} = {8AE45026-C2BC-4E18-B512-53E89F8ADA90}
+		{90E950C2-5529-4A3F-9AE3-284E910FF1F6} = {8AE45026-C2BC-4E18-B512-53E89F8ADA90}
+		{44A81221-38D6-4053-ACA4-B1D0AE975CC2} = {8AE45026-C2BC-4E18-B512-53E89F8ADA90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64E704C1-A7C0-4513-AA10-2807002F98CE}
