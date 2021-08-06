@@ -45,5 +45,7 @@ namespace Forbytes.MovieCatalog.API.ApiModels
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public List<CommentApiModel> Comments { get; set; }
     }
 }
